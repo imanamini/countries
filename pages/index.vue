@@ -15,37 +15,40 @@
     </div>
     <input v-model='searchInput' @keyup='searchCountry()'/>
     <div class='row'>
-      <slot v-for='(country,index) in countries.data'>
-        <div :key='index' style='border: 1px solid #9e9e9e; width: 200px'>
-          <img width='100' :src='country.flag' />
-          <div>
-            {{country.name}}
-          </div>
-          <div>
+      <slot v-for='(country,index) in countries'>
+        <nuxt-link :to='country.name'>
+          <div :key='index' style='border: 1px solid #9e9e9e; width: 200px'>
+            <img width='100' :src='country.flag' />
+            <div>
+              {{country.name}}
+            </div>
+            <div>
           <span>
             population:
           </span>
-            <span>
+              <span>
             {{ country.population }}
           </span>
-          </div>
-          <div>
+            </div>
+            <div>
           <span>
             region:
           </span>
-            <span>
+              <span>
             {{ country.region }}
           </span>
-          </div>
-          <div>
+            </div>
+            <div>
           <span>
             capital:
           </span>
-            <span>
+              <span>
             {{ country.capital }}
           </span>
+            </div>
           </div>
-        </div>
+
+        </nuxt-link>
       </slot>
     </div>
   </div>
@@ -58,26 +61,36 @@ export default {
   data(){
     return {
       countriesTemp:[],
-      allCountries:[],
+      // allCountries:[],
       countries:[],
       searchInput:'',
       isFilter: 'All'
     }
   },
+  fetch({ store, params }) {
+    return store.dispatch('countries/fetchData', params)
+  },
+  computed: {
+    allCountries() {
+      return this.$store.state.countries.allCountries
+      // return this.courseProp
+    },
+  },
   mounted() {
-    this.getCountries()
+    this.countries = this.deepCopy(this.allCountries)
+    // this.getCountries()
   },
   methods:{
     filterCountries(data){
       this.isFilter = ''
       // this.countriesTemp = []
-      this.countries.data = []
+      this.countries = []
       if (data === "All"){
-        this.countries.data = this.allCountries
+        this.countries = this.allCountries
       } else {
-        for (const country of this.allCountries.data){
+        for (const country of this.allCountries){
           if (country.region === data){
-            this.countries.data.push(country)
+            this.countries.push(country)
           }
         }
         this.isFilter = data
@@ -104,10 +117,10 @@ export default {
       };
       let fuse
       if (this.isFilter){
-         fuse = new Fuse(this.countries.data, options);
+         fuse = new Fuse(this.countries, options);
       } else {
-        this.countries.data = []
-        fuse = new Fuse(this.allCountries.data, options);
+        this.countries = []
+        fuse = new Fuse(this.allCountries, options);
       }
 
       // this.categories.data = []
@@ -117,13 +130,15 @@ export default {
         this.countriesTemp.push(item.item)
       }
       if (!this.searchInput && this.isFilter === 'All'){
-        this.countries.data = this.allCountries.data
+        this.countries = this.allCountries
       } else if (!this.searchInput && this.isFilter !== 'All'){
         // this.countries.data=this.countriesTemp
         this.console('1')
       }else if (this.searchInput && this.isFilter !== 'All'){
-        this.countries.data=this.countriesTemp
+        this.countries=this.countriesTemp
         this.console('1')
+      } else if (this.searchInput && this.isFilter === 'All'){
+        this.countries=this.countriesTemp
       }
       this.console(fuse.search(this.searchInput),this.allCountries.data,this.countriesTemp,this.countries.data)
       // this.countriesTemp = fuse.search(this.searchInput)
