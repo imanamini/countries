@@ -8,8 +8,11 @@
 <script>
 import Header from '../components/Header'
 export default {
+  components: { Header },
   layout: 'default',
-  components: { Header }
+  mounted() {
+    this.$nuxt.$colorMode.preference = ''
+  }
 }
 </script>
 

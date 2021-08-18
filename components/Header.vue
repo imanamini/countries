@@ -1,12 +1,32 @@
 <template>
-<div>
+<button @click='changeModeColor()'>
   dark mode
-</div>
+  <span class="material-icons-outlined">
+dark_mode
+</span>
+</button>
 </template>
 
 <script>
 export default {
-  name: 'Header'
+  name: 'Header',
+  data(){
+    return{
+      darkMode: false
+    }
+  },
+  methods:{
+    changeModeColor(){
+      if (this.darkMode){
+        this.$nuxt.$colorMode.preference = ''
+        this.darkMode = false
+      } else{
+        this.$nuxt.$colorMode.preference = 'dark'
+        this.darkMode = true
+      }
+
+    }
+  }
 }
 </script>
 
