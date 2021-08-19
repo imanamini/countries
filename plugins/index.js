@@ -6,6 +6,10 @@ import VueRouter from 'vue-router'
 import consola from 'consola'
 import axios from 'axios'
 import $ from 'jquery'
+// import '../../node_modules/bootstrap/js/dist/util.js'
+// import '../../node_modules/bootstrap/js/dist/modal.js'
+// import '../../node_modules/bootstrap/dist/js/bootstrap.bundle.js'
+
 const data = {
   headers: {},
 }

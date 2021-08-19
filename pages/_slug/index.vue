@@ -26,14 +26,14 @@
         >Back
       </button>
     </nuxt-link>
-    <div class='d-flex'>
+    <div class='d-flex justify-content-between'>
       <img
         :src='country.flag'
         style='max-width: 581px; max-height: 373px; object-fit: cover'
       />
-      <div style='margin-left: 92px'>
+      <div>
         <div class='country__name'>{{ country.name }}</div>
-        <div class='d-flex'>
+        <div class='d-flex' style='width: 572px'>
           <div class='col-md-6'>
             <div>
               <span class='country__nativeName--title'>Native Name:</span>

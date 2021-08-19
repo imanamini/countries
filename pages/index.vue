@@ -1,8 +1,8 @@
 <template>
   <div class='container mt-4 px-0' style='padding-top: 67px'>
-    <div class='w-100 row' style='padding-left: 12px;padding-right: 12px'>
+    <div class='w-100 row m-0' style='padding-left: 12px;padding-right: 12px'>
       <div
-        class='d-flex align-items-center'
+        class='d-flex align-items-center me-auto mb-5 mb-md-0'
         style='
         background-color: var(--bg-secondary);
           height: 48px;
@@ -26,35 +26,36 @@
           @keyup='searchCountry()'
         />
       </div>
-      <div class='dropdown ml-auto pl-4'>
+      <div class='dropdown px-0' style='width: 188px;'>
         <button
           id='dropdownMenuButton'
           aria-expanded='false'
           aria-haspopup='true'
-          class='fs-12 align-items-center d-flex ps-4 pe-3'
+          class='fs-12 align-items-center d-flex ps-4 pe-3 w-100'
+          data-bs-toggle='dropdown'
           data-toggle='dropdown'
-          style='border:unset;border-radius: 4px;box-shadow: 0px 2px 4px rgba(33, 33, 33, 0.16);height: 48px; width: 188px; color: var(--color);background-color: var(--bg-secondary)'
+          style='border:unset;border-radius: 4px;box-shadow: 0px 2px 4px rgba(33, 33, 33, 0.16);height: 48px; color: var(--color);background-color: var(--bg-secondary)'
           type='button'
         >
           {{ isFilter === 'All' ? 'Filter by Region' : isFilter }}
           <span class='material-icons-outlined ml-auto'> expand_more </span>
         </button>
-        <div aria-labelledby='dropdownMenuButton' class='dropdown-menu'>
-          <div class='dropdown-item' @click="filterCountries('All')">All</div>
-          <div class='dropdown-item' @click="filterCountries('Africa')">
+        <ul aria-labelledby='dropdownMenuButton' class='dropdown-menu py-0 mt-1' style='min-width: 188px'>
+          <li class='dropdown-item pointer fs-12' @click="filterCountries('All')">All</li>
+          <li class='dropdown-item pointer fs-12' @click="filterCountries('Africa')">
             Africa
-          </div>
-          <div class='dropdown-item' @click="filterCountries('Americas')">
+          </li>
+          <li class='dropdown-item pointer fs-12' @click="filterCountries('Americas')">
             Americas
-          </div>
-          <div class='dropdown-item' @click="filterCountries('Asia')">Asia</div>
-          <div class='dropdown-item' @click="filterCountries('Europe')">
+          </li>
+          <li class='dropdown-item pointer fs-12' @click="filterCountries('Asia')">Asia</li>
+          <li class='dropdown-item pointer fs-12' @click="filterCountries('Europe')">
             Europe
-          </div>
-          <div class='dropdown-item' @click="filterCountries('Oceania')">
+          </li>
+          <li class='dropdown-item pointer fs-12' @click="filterCountries('Oceania')">
             Oceania
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </div>
 

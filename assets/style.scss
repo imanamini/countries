@@ -24,6 +24,10 @@ body {
   font-weight: 800;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 :root {
   --color: hsl(200, 15%, 8%);
   --color-primary: #158876;
