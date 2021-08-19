@@ -114,11 +114,9 @@ export default {
     }
   },
   mounted() {
-    const obj = this.allCountries.find(
+    this.country = this.allCountries.find(
       (o) => o.name === this.$route.params.slug
     )
-    this.console(this.$route.params.slug, obj)
-    this.country = obj
   },
   methods: {
     getBordersCountry() {
