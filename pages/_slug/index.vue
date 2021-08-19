@@ -1,6 +1,6 @@
 <template>
   <div class='container' style='padding-top: 67px'>
-    <nuxt-link style='' to='/'>
+    <nuxt-link to='/'>
       <button
         class='
           bg-white
