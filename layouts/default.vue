@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Header/>
-    <Nuxt/>
+    <Header />
+    <Nuxt />
   </div>
 </template>
 
@@ -12,10 +12,8 @@ export default {
   layout: 'default',
   mounted() {
     this.$nuxt.$colorMode.preference = ''
-  }
+  },
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

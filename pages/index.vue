@@ -1,79 +1,135 @@
 <template>
-  <div class='container'>
-    <div class='w-100 d-flex'>
-      <div>
-        <span class="material-icons-outlined">
-search
-</span>
-        <input v-model='searchInput' style='border: unset' placeholder='search' @keyup='searchCountry()'/>
+  <div class="container mt-4 px-0" style="padding-top: 67px">
+    <div class="w-100 d-flex px-3">
+      <div
+        class="bg-white d-flex align-items-center"
+        style="
+          height: 48px;
+          width: 335px;
+          box-shadow: 0px 2px 4px rgba(33, 33, 33, 0.16);
+          border-radius: 4px;
+        "
+      >
+        <span
+          style="margin-left: 32px; color: #9e9e9e"
+          class="material-icons-outlined"
+        >
+          search
+        </span>
+        <input
+          v-model="searchInput"
+          class="ml-4 h-100"
+          style="border: unset; outline: none"
+          placeholder="Search for a country..."
+          @keyup="searchCountry()"
+        />
       </div>
-      <div class="dropdown ml-auto">
-        <button id="dropdownMenuButton" class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{isFilter === 'All' ? 'Filter by Region' : isFilter}}
+      <div class="dropdown ml-auto pl-4">
+        <button
+          id="dropdownMenuButton"
+          style="height: 48px; width: 188px; color: #323232"
+          class="btn bg-white fs-12 align-items-center d-flex"
+          type="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          {{ isFilter === 'All' ? 'Filter by Region' : isFilter }}
+          <span class="material-icons-outlined ml-auto"> expand_more </span>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <div class="dropdown-item" @click='filterCountries("All")'>All</div>
-          <div class="dropdown-item" @click='filterCountries("Africa")'>Africa</div>
-          <div class="dropdown-item" @click='filterCountries("Americas")'>Americas</div>
-          <div class="dropdown-item" @click='filterCountries("Asia")'>Asia</div>
-          <div class="dropdown-item" @click='filterCountries("Europe")'>Europe</div>
-          <div class="dropdown-item" @click='filterCountries("Oceania")'>Oceania</div>
+          <div class="dropdown-item" @click="filterCountries('All')">All</div>
+          <div class="dropdown-item" @click="filterCountries('Africa')">
+            Africa
+          </div>
+          <div class="dropdown-item" @click="filterCountries('Americas')">
+            Americas
+          </div>
+          <div class="dropdown-item" @click="filterCountries('Asia')">Asia</div>
+          <div class="dropdown-item" @click="filterCountries('Europe')">
+            Europe
+          </div>
+          <div class="dropdown-item" @click="filterCountries('Oceania')">
+            Oceania
+          </div>
         </div>
       </div>
-
-
     </div>
 
-    <div class='row m-0'>
-      <slot v-for='(country,index) in allCountries'>
-        <nuxt-link v-show='country.show' class='mr-4' :to='country.name'>
-          <div :key='index' style='border: 1px solid #9e9e9e; width: 200px'>
-            <img width='100' :src='country.flag' />
-            <div class='fs-20'>
-              {{country.name}}
+    <div class="row m-0 mt-4 pt-2 justify-content-between">
+      <slot v-for="(country, index) in allCountries">
+        <div
+          :key="index"
+          class="col-md-3"
+          style="max-width: 303px; margin-bottom: 32px"
+        >
+          <nuxt-link
+            v-show="country.show"
+            class="bg-white p-0"
+            style="max-width: 303px"
+            :to="country.name"
+          >
+            <div
+              class="bg-white"
+              style="
+                max-width: 279px;
+                border: 1px solid #9e9e9e;
+                box-shadow: 0px 2px 4px rgba(33, 33, 33, 0.16);
+                border-radius: 4px;
+              "
+            >
+              <img
+                class="w-100"
+                style="max-height: 160px; min-height: 160px; object-fit: cover"
+                :src="country.flag"
+              />
+              <div
+                style="
+                  padding-left: 28px;
+                  padding-top: 22px;
+                  padding-bottom: 32px;
+                "
+              >
+                <div class="country__name mb-2">
+                  {{ country.name }}
+                </div>
+                <div class="">
+                  <span class="country__population--title"> population: </span>
+                  <span class="country__population--content">
+                    {{ country.population }}
+                  </span>
+                </div>
+                <div class="">
+                  <span class="country__region--title"> region: </span>
+                  <span class="country__region--content">
+                    {{ country.region }}
+                  </span>
+                </div>
+                <div class="">
+                  <span class="country__capital--title"> capital: </span>
+                  <span class="country__capital--content">
+                    {{ country.capital }}
+                  </span>
+                </div>
+              </div>
             </div>
-            <div>
-          <span>
-            population:
-          </span>
-              <span>
-            {{ country.population }}
-          </span>
-            </div>
-            <div>
-          <span>
-            region:
-          </span>
-              <span>
-            {{ country.region }}
-          </span>
-            </div>
-            <div>
-          <span>
-            capital:
-          </span>
-              <span>
-            {{ country.capital }}
-          </span>
-            </div>
-          </div>
-        </nuxt-link>
+          </nuxt-link>
+        </div>
       </slot>
     </div>
   </div>
-
 </template>
 
 <script>
 import Fuse from 'fuse.js'
 export default {
-  data(){
+  data() {
     return {
-      countriesTemp:[],
+      countriesTemp: [],
       // allCountries:[],
-      countries:[],
-      searchInput:'',
-      isFilter: 'All'
+      countries: [],
+      searchInput: '',
+      isFilter: 'All',
     }
   },
   fetch({ store, params }) {
@@ -86,59 +142,57 @@ export default {
     },
   },
   mounted() {
-    for (const country of this.allCountries){
+    for (const country of this.allCountries) {
       country.show = true
     }
     this.$forceUpdate()
     // this.countries = this.deepCopy(this.allCountries)
     // this.getCountries()
   },
-  methods:{
-    filterCountries(data){
+  methods: {
+    filterCountries(data) {
       this.isFilter = ''
       // this.countries = []
       // if (data === "All"){
-        for (const country of this.allCountries){
-          if (data === "All"){
-            country.show = true
-          } else if (country.region === data){
-            country.show = true
-          } else country.show = false
-        }
+      for (const country of this.allCountries) {
+        if (data === 'All') {
+          country.show = true
+        } else if (country.region === data) {
+          country.show = true
+        } else country.show = false
+      }
       // } else {
-        this.isFilter = data
+      this.isFilter = data
       // }
     },
-    searchCountry(){
+    searchCountry() {
       const options = {
         threshold: 0.3,
         useExtendedSearch: true,
-        keys: [
-          "name"
-        ]
-      };
+        keys: ['name'],
+      }
       // let fuse
       // if (this.isFilter){
-         // fuse = new Fuse(this.countries, options);
+      // fuse = new Fuse(this.countries, options);
       // } else {
-        // this.countries = []
-        const fuse = new Fuse(this.allCountries, options);
+      // this.countries = []
+      const fuse = new Fuse(this.allCountries, options)
       // }
       // this.countriesTemp = []
-      if (!this.searchInput){
-        for (const country of this.allCountries){
+      if (!this.searchInput) {
+        for (const country of this.allCountries) {
           country.show = true
         }
       } else {
-        for ( const item of fuse.search(this.searchInput)){
-          for (const country of this.allCountries){
-            if (item.item.name === country.name){
+        for (const item of fuse.search(this.searchInput)) {
+          for (const country of this.allCountries) {
+            if (item.item.name === country.name) {
               country.show = true
             } else country.show = false
           }
         }
       }
-      this.console(fuse.search(this.searchInput),0)
+      this.console(fuse.search(this.searchInput), 0)
       // for (const country of this.allCountries){
       //   if (!this.searchInput){
       //     country.show = true
@@ -160,6 +214,37 @@ export default {
       //   this.countries=this.countriesTemp
       // }
     },
-  }
+  },
 }
 </script>
+<style scoped>
+::placeholder {
+  font-size: 12px;
+  color: #cfcfcf;
+}
+a {
+  color: unset;
+  text-decoration: none;
+}
+.country__name {
+  /*font-family: Nunito Sans;*/
+  font-style: normal;
+  font-weight: 800;
+  font-size: 14px;
+}
+.country__population--title,
+.country__region--title,
+.country__capital--title {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+}
+.country__population--content,
+.country__region--content,
+.country__capital--content {
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 16px;
+  margin-left: 4px;
+}
+</style>

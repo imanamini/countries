@@ -1,73 +1,103 @@
 <template>
-<div>
-  <nuxt-link to='/'>
-    <button>
-      back
-    </button>
-  </nuxt-link>
-  <div class='d-flex'>
-    <img width='200' :src='country.flag'/>
-    <div>
-      <div>{{country.name}}</div>
-      <div class='d-flex'>
-        <div>
+  <div class='container' style='padding-top: 67px'>
+    <nuxt-link style='' to='/'>
+      <button
+        class='
+          bg-white
+          btn
+          fw-600
+          fs-14
+          d-flex
+          align-items-center
+          justify-content-center
+        '
+        style='
+          box-shadow: 0px 1px 8px 4px rgba(33, 33, 33, 0.16);
+          border-radius: 4px;
+          width: 118px;
+          height: 39px;
+          margin-top: 52px;
+          margin-bottom: 64px;
+        '
+      >
+        <span class='material-icons-outlined me-1'> keyboard_backspace </span
+        >Back
+      </button>
+    </nuxt-link>
+    <div class='d-flex'>
+      <img
+        :src='country.flag'
+        style='max-width: 581px; max-height: 373px; object-fit: cover'
+      />
+      <div style='margin-left: 92px'>
+        <div class='country__name'>{{ country.name }}</div>
+        <div class='d-flex'>
           <div>
-            <span>Native Name:</span> <span>{{country.nativeName}}</span>
+            <div>
+              <span class='country__nativeName--title'>Native Name:</span>
+              <span class='country__nativeName--content'>{{ country.nativeName }}</span>
+            </div>
+            <div>
+              <span class='country__population--title'>Population:</span>
+              <span class='country__population--content'>{{ country.population }}</span>
+            </div>
+            <div>
+              <span class='country__region--title'>Region:</span>
+              <span class='country__region--content'>{{ country.region }}</span>
+            </div>
+            <div>
+              <span class='country__subRegion--title'>Sub region:</span>
+              <span class='country__subRegion--content'>{{ country.subregion }}</span>
+            </div>
+            <div>
+              <span class='country__capital--title'>Capital:</span>
+              <span class='country__capital--content'>{{ country.capital }}</span>
+            </div>
           </div>
           <div>
-            <span>Population:</span>
-            <span>{{country.population}}</span>
-          </div>
-          <div>
-            <span>Region:</span>
-            <span>{{country.region}}</span>
-          </div>
-          <div>
-            <span>Sub region:</span>
-            <span>{{country.subregion}}</span>
-          </div>
-          <div>
-            <span>Capital:</span>
-            <span>{{country.capital}}</span>
+            <div>
+              <span class='country__topLevelDomain--title'>Top level domain:</span>
+              <span class='country__topLevelDomain--content'>{{ country.topLevelDomain }}</span>
+            </div>
+            <div>
+              <span class='country__currencies--title'>Currencies:</span>
+              <span v-if='country.currencies' class='country__currencies--content'>{{
+                  country.currencies[0].name
+                }}</span>
+            </div>
+            <div>
+              <span class='country__languages--title'>Languages:</span>
+              <slot v-for='(language, index) in country.languages'>
+                <span :key='index' class='country__languages--content'>{{ language.name }}</span>
+              </slot>
+            </div>
           </div>
         </div>
-        <div>
-          <div>
-            <span>Top level domain:</span>
-            <span>{{country.topLevelDomain}}</span>
-          </div>
-          <div>
-            <span>Currencies:</span>
-            <span v-if='country.currencies'>{{country.currencies[0].name}}</span>
-          </div>
-          <div>
-            <span>Languages:</span>
-            <slot v-for='(language,index) in country.languages'>
-              <span :key='index'>{{language.name}}</span>
+        <div class='mt-5'>
+          <div class='row m-0 d-flex align-items-center'>
+            <span class='country__borderCountry--title w-auto ps-0'>Border country:</span>
+            <slot v-for='(borderCountry, index) in getBordersCountry()'>
+              <nuxt-link :key='index' :to='borderCountry' class='w-auto px-1'>
+                <button class='bg-white btn me-2 mb-2' style='box-shadow: 0px 1px 8px 4px rgba(33, 33, 33, 0.16);
+border-radius: 4px;min-width: 99px;
+height: 39px;'>
+                  {{ borderCountry }}
+                </button>
+              </nuxt-link>
             </slot>
           </div>
+
         </div>
       </div>
-      <div>
-        <span>Border country:</span>
-        <slot v-for='(borderCountry,index) in getBordersCountry()'>
-            <nuxt-link :key='index' :to='borderCountry'>
-              {{borderCountry}}
-            </nuxt-link>
-        </slot>
-      </div>
-
     </div>
   </div>
-
-</div>
 </template>
 
 <script>
 export default {
   name: 'Index',
-  data(){
-    return{
+  data() {
+    return {
       country: {}
     }
   },
@@ -77,25 +107,27 @@ export default {
   computed: {
     allCountries() {
       return this.$store.state.countries.allCountries
-    },
+    }
   },
   mounted() {
-    const obj = this.allCountries.find(o => o.name === this.$route.params.slug);
-    this.console(this.$route.params.slug,obj)
+    const obj = this.allCountries.find(
+      (o) => o.name === this.$route.params.slug
+    )
+    this.console(this.$route.params.slug, obj)
     this.country = obj
   },
-  methods:{
-    getBordersCountry(){
+  methods: {
+    getBordersCountry() {
       const array = []
-      this.console(this.country,this.country.borders,'3')
-      if (this.country.borders){
-        for (const code of this.country.borders){
-          const obj = this.allCountries.find(o => o.alpha3Code === code);
+      this.console(this.country, this.country.borders, '3')
+      if (this.country.borders) {
+        for (const code of this.country.borders) {
+          const obj = this.allCountries.find((o) => o.alpha3Code === code)
           array.push(obj.name)
         }
       }
 
-      this.console(array,2)
+      this.console(array, 2)
 
       return array
     }
@@ -104,5 +136,28 @@ export default {
 </script>
 
 <style scoped>
+a {
+  color: unset;
+  text-decoration: none;
+}
 
+.country__capital--title, .country__currencies--title, .country__languages--title, .country__region--title, .country__subRegion--title, .country__topLevelDomain--title, .country__nativeName--title, .country__population--title, .country__borderCountry--title {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  margin-bottom: 8px;
+}
+
+.country__population--content, .country__capital--content, .country__currencies--content, .country__languages--content, .country__nativeName--content, .country__region--content {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.country__name {
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 33px;
+  margin-bottom: 28px;
+}
 </style>
