@@ -199,18 +199,11 @@ export default {
         } else country.show = country.region === region
       }
       this.isFilter = region
-    },
-    searchCountry() {
-
     }
   }
 }
 </script>
 <style scoped>
-.container {
-  padding-top: 67px
-}
-
 ::placeholder {
   font-size: 12px;
   color: var(--color);

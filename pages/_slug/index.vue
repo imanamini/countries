@@ -1,40 +1,31 @@
 <template>
-  <div class='container' style='padding-top: 67px'>
+  <div class='container'>
     <nuxt-link to='/'>
       <button
         class='
-
           btn
           fw-600
           fs-14
           d-flex
           align-items-center
           justify-content-center
-        '
-        style='
-          box-shadow: 0px 1px 8px 4px rgba(33, 33, 33, 0.16);
-          border-radius: 4px;
-          width: 118px;
-          height: 39px;
-          margin-top: 52px;
-          margin-bottom: 64px;
-          background-color: var(--bg-secondary);
-          color: var(--color-secondary);
+          btnReturn
         '
       >
         <span class='material-icons-outlined me-1'> keyboard_backspace </span
         >Back
       </button>
     </nuxt-link>
-    <div class='d-flex justify-content-between'>
+    <div class='row m-0 justify-content-between'>
       <img
+        :alt='country.name'
         :src='country.flag'
-        style='max-width: 581px; max-height: 373px; object-fit: cover'
+        class='country__flag col-lg-6 col-12 px-0 pe-lg-5 mb-5 mb-lg-0'
       />
-      <div>
+      <div class='col-lg-6 col-12 px-0 px-lg-5'>
         <div class='country__name'>{{ country.name }}</div>
-        <div class='d-flex' style='width: 572px'>
-          <div class='col-md-6'>
+        <div class='row m-0' style='max-width: 572px'>
+          <div class='col-md-6 px-0 '>
             <div>
               <span class='country__nativeName--title'>Native Name:</span>
               <span class='country__nativeName--content'>{{ country.nativeName }}</span>
@@ -56,7 +47,7 @@
               <span class='country__capital--content'>{{ country.capital }}</span>
             </div>
           </div>
-          <div class='col-md-6'>
+          <div class='col-md-6 px-0 '>
             <div>
               <span class='country__topLevelDomain--title'>Top level domain:</span>
               <slot v-for='(topLevelDomain,index) in country.topLevelDomain'>
@@ -164,5 +155,26 @@ a {
   line-height: 33px;
   margin-bottom: 28px;
   color: var(--color);
+}
+
+.btnReturn {
+  box-shadow: 0 1px 8px 4px rgba(33, 33, 33, 0.16);
+  border-radius: 4px;
+  width: 118px;
+  height: 39px;
+  margin-top: 52px;
+  margin-bottom: 64px;
+  background-color: var(--bg-secondary);
+  color: var(--color-secondary);
+}
+
+.country__flag {
+  max-width: 100%;
+  /*max-height: 373px;*/
+  object-fit: contain;
+}
+
+.row > .col-md-6 > div {
+  margin-bottom: 8px;
 }
 </style>

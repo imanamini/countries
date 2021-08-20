@@ -3,7 +3,7 @@
        style='box-shadow: 0 2px 4px rgba(33, 33, 33, 0.16);z-index: 100; height: 67px; top: 0;background-color: var(--bg-secondary)'>
 
     <div
-      class=' d-flex  align-items-center h-100 container'
+      class=' d-flex  align-items-center h-100 container pt-0'
 
     >
       <div class='fw-800 fs-14' style='color: var(--color)'>Where in the world?</div>
