@@ -2,13 +2,16 @@ export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
   target: 'static',
+  mode: 'history',
   env: {
     base_url: 'https://restcountries.eu/rest/v2/',
   },
   router: {
     base: '/countries/',
   },
-
+  // generate: {
+  //   fallback: 'index.html',
+  // },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'countries',
@@ -18,7 +21,7 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico?' }],
     script: [
       {
         src: 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js',

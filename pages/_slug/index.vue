@@ -160,6 +160,7 @@ export default {
 }
 
 .country__flag {
+  border: 1px solid var(--border-color);
   max-width: 100%;
   object-fit: contain;
 }
