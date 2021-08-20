@@ -123,26 +123,28 @@ export default {
     }
   },
   watch: {
+    /**
+     * Search between countries
+     *
+     * After each change in {searchInput}, call this function to search in countries
+     *
+     **/
     searchInput() {
       const options = {
         threshold: 0.2,
         useExtendedSearch: true,
         keys: ['name']
       }
-      // let fuse
-      // if (this.isFilter){
-      // fuse = new Fuse(this.countries, options);
-      // } else {
-      // this.countries = []
       const fuse = new Fuse(this.allCountries, options)
-      // }
-      // const countriesTemp = []
       this.countriesTemp = []
-      this.console(this.countriesTemp, '4656')
       let countriesTempIndex = []
-      if (!this.searchInput && this.isFilter === 'All') {
-        for (const country of this.allCountries) {
-          country.show = true
+      if (!this.searchInput) {
+        if (this.isFilter !== 'All') {
+          this.filterCountries(this.isFilter)
+        } else {
+          for (const country of this.allCountries) {
+            country.show = true
+          }
         }
       } else {
         for (const item of fuse.search(this.searchInput)) {
@@ -150,27 +152,16 @@ export default {
         }
         countriesTempIndex = this.countriesTemp.map((obj) => obj.refIndex)
         if (this.countriesTemp) {
-          this.console(123456)
           for (let i = 0; i < this.allCountries.length; i++) {
-            if (countriesTempIndex.includes(i)) {
+            if (countriesTempIndex.includes(i) && this.allCountries[i].show) {
               this.allCountries[i].show = true
-            } else {
+            } else if (!countriesTempIndex.includes(i)) {
               this.allCountries[i].show = false
             }
           }
         }
       }
-
       this.$forceUpdate()
-      // this.console(fuse.search(this.searchInput), 0)
-      //
-      // if (!this.searchInput && this.isFilter === 'All'){
-      //   this.countries = this.allCountries
-      // } else if (this.searchInput && this.isFilter !== 'All'){
-      //   this.countries=this.countriesTemp
-      // } else if (this.searchInput && this.isFilter === 'All'){
-      //   this.countries=this.countriesTemp
-      // }
     }
   },
   mounted() {
