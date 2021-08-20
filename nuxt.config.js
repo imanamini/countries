@@ -9,9 +9,9 @@ export default {
   router: {
     base: '/countries/',
   },
-  // generate: {
-  //   fallback: 'index.html',
-  // },
+  generate: {
+    fallback: 'index.html',
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'countries',
