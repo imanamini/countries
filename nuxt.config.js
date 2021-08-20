@@ -2,6 +2,9 @@ export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
   target: 'static',
+  env: {
+    base_url: 'https://restcountries.eu/rest/v2/',
+  },
   router: {
     base: '/countries/',
   },
@@ -70,17 +73,19 @@ export default {
     },
   },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    proxy: true,
-  },
+  // axios: {
+  //   baseURL: 'https://api.github.com',
+  //   proxyHeaders: false,
+  //   credentials: false,
+  // },
 
-  proxy: {
-    '/api/': {
-      target: 'http://restcountries.eu/rest/v2/',
-      pathRewrite: { '^/api/': '' },
-      changeOrigin: true,
-    },
-  },
+  // proxy: {
+  //   '/api/': {
+  //     target: 'http://restcountries.eu/rest/v2/',
+  //     pathRewrite: { '^/api/': '' },
+  //     changeOrigin: true,
+  //   },
+  // },
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {

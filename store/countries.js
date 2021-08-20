@@ -17,7 +17,7 @@ export const mutations = {
 }
 export const actions = {
   async fetchData({ commit }, params) {
-    const { data } = await tools._axios().get('/api/all')
+    const { data } = await tools._axios().get('/all')
     if (data.status === 'error') {
       return false
     } else if (data) {
