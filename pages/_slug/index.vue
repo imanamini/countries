@@ -24,8 +24,8 @@
       />
       <div class='col-lg-6 col-12 px-0 px-lg-5'>
         <div class='country__name'>{{ country.name }}</div>
-        <div class='row m-0' style='max-width: 572px'>
-          <div class='col-md-6 px-0 '>
+        <div class='row m-0'>
+          <div class='col-md-6 px-0'>
             <div>
               <span class='country__nativeName--title'>Native Name:</span>
               <span class='country__nativeName--content'>{{ country.nativeName }}</span>
@@ -47,7 +47,7 @@
               <span class='country__capital--content'>{{ country.capital }}</span>
             </div>
           </div>
-          <div class='col-md-6 px-0 '>
+          <div class='col-md-6 px-0'>
             <div>
               <span class='country__topLevelDomain--title'>Top level domain:</span>
               <slot v-for='(topLevelDomain,index) in country.topLevelDomain'>
@@ -68,20 +68,15 @@
             </div>
           </div>
         </div>
-        <div class='mt-5'>
-          <div class='row m-0 d-flex align-items-center'>
-            <span class='country__borderCountry--title w-auto ps-0'>Border country:</span>
-            <slot v-for='(borderCountry, index) in getBordersCountry()'>
-              <nuxt-link :key='index' :to='borderCountry' class='w-auto px-1'>
-                <button class=' btn me-2 mb-2' style='box-shadow: 0px 1px 8px 4px rgba(33, 33, 33, 0.16);
-border-radius: 4px;min-width: 99px;min-height:39px;background-color: var(--bg-secondary);
-          color: var(--color-secondary);'>
-                  {{ borderCountry }}
-                </button>
-              </nuxt-link>
-            </slot>
-          </div>
-
+        <div class='row m-0 mt-5 d-flex align-items-center'>
+          <span class='country__borderCountry--title w-auto ps-0'>Border country:</span>
+          <slot v-for='(borderCountry, index) in getBordersCountry()'>
+            <nuxt-link :key='index' :to='borderCountry' class='w-auto px-1'>
+              <button class='btnBorderCountry btn me-2 mb-2'>
+                {{ borderCountry }}
+              </button>
+            </nuxt-link>
+          </slot>
         </div>
       </div>
     </div>
@@ -110,30 +105,26 @@ export default {
     )
   },
   methods: {
+    /**
+     * Show country name in border country
+     *
+     * @return {Array} for show border country button
+     */
     getBordersCountry() {
-      const array = []
-      this.console(this.country, this.country.borders, '3')
+      const borderCountry = []
       if (this.country.borders) {
         for (const code of this.country.borders) {
           const obj = this.allCountries.find((o) => o.alpha3Code === code)
-          array.push(obj.name)
+          borderCountry.push(obj.name)
         }
       }
-
-      this.console(array, 2)
-
-      return array
+      return borderCountry
     }
   }
 }
 </script>
 
 <style scoped>
-a {
-  color: unset;
-  text-decoration: none;
-}
-
 .country__capital--title, .country__currencies--title, .country__languages--title, .country__region--title, .country__subRegion--title, .country__topLevelDomain--title, .country__nativeName--title, .country__population--title, .country__borderCountry--title {
   font-weight: 600;
   font-size: 16px;
@@ -170,11 +161,19 @@ a {
 
 .country__flag {
   max-width: 100%;
-  /*max-height: 373px;*/
   object-fit: contain;
 }
 
 .row > .col-md-6 > div {
   margin-bottom: 8px;
+}
+
+.btnBorderCountry {
+  box-shadow: 0 1px 8px 4px rgba(33, 33, 33, 0.16);
+  border-radius: 4px;
+  min-width: 99px;
+  min-height: 39px;
+  background-color: var(--bg-secondary);
+  color: var(--color-secondary);
 }
 </style>

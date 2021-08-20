@@ -138,37 +138,31 @@ export default {
       // }
       // const countriesTemp = []
       this.countriesTemp = []
-      if (!this.searchInput) {
+      this.console(this.countriesTemp, '4656')
+      let countriesTempIndex = []
+      if (!this.searchInput && this.isFilter === 'All') {
         for (const country of this.allCountries) {
           country.show = true
         }
       } else {
         for (const item of fuse.search(this.searchInput)) {
-          this.countriesTemp.push(item.item)
+          this.countriesTemp.push(item)
         }
-      }
-      if (this.countriesTemp) {
-        for (const countryTemp in this.countriesTemp) {
-          for (const country in this.allCountries) {
-            if (this.countriesTemp[countryTemp].name === this.allCountries[country].name) {
-              this.allCountries[country].show = true
-            } else this.allCountries[country].show = false
+        countriesTempIndex = this.countriesTemp.map((obj) => obj.refIndex)
+        if (this.countriesTemp) {
+          this.console(123456)
+          for (let i = 0; i < this.allCountries.length; i++) {
+            if (countriesTempIndex.includes(i)) {
+              this.allCountries[i].show = true
+            } else {
+              this.allCountries[i].show = false
+            }
           }
         }
       }
-      this.console(fuse.search(this.searchInput), 0)
-      // for (const country of this.allCountries){
-      //   if (!this.searchInput){
-      //     country.show = true
-      //   } else{
-      //     for (const item of fuse.search(this.searchInput)){
-      //       if (item.item.name === country.name){
-      //         country.show = true
-      //       } else country.show = false
-      //     }
-      //   }
-      // }
+
       this.$forceUpdate()
+      // this.console(fuse.search(this.searchInput), 0)
       //
       // if (!this.searchInput && this.isFilter === 'All'){
       //   this.countries = this.allCountries
@@ -207,11 +201,6 @@ export default {
 ::placeholder {
   font-size: 12px;
   color: var(--color);
-}
-
-a {
-  color: unset;
-  text-decoration: none;
 }
 
 .country__name {
