@@ -8,7 +8,7 @@
     >
       <div class='fw-800 fs-14' style='color: var(--color)'>Where in the world?</div>
       <button
-        class='ml-auto fs-12 fw-600 btn align-items-center d-flex'
+        class='ms-auto fs-12 fw-600 btn align-items-center d-flex'
         style='color: var(--color)'
         @click='changeModeColor()'
       >

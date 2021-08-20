@@ -1,6 +1,7 @@
 @import 'material-icons/iconfont/material-icons.css';
 //@import url('https://fonts.google.com/specimen/Nunito+Sans');
 @import 'assets/css/fonts.css';
+@import "assets/typography.css";
 @import url(./css/fonts.css);
 
 body {
@@ -19,18 +20,6 @@ a {
 
 .btn:focus {
   box-shadow: unset !important;
-}
-
-.fw-300 {
-  font-weight: 300;
-}
-
-.fw-600 {
-  font-weight: 600;
-}
-
-.fw-800 {
-  font-weight: 800;
 }
 
 .pointer {
@@ -53,24 +42,4 @@ a {
   --bg: hsl(207, 26%, 17%);
   --bg-secondary: hsl(209, 23%, 22%);
   //--border-color: #0d2538;
-}
-
-.fs-8 {
-  font-size: 8px;
-}
-
-.fs-12 {
-  font-size: 12px;
-}
-
-.fs-14 {
-  font-size: 14px;
-}
-
-.fs-20 {
-  font-size: 20px;
-}
-
-.ml-auto {
-  margin-left: auto;
 }

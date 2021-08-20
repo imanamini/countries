@@ -29,7 +29,7 @@
           type='button'
         >
           {{ isFilter === 'All' ? 'Filter by Region' : isFilter }}
-          <span class='material-icons-outlined ml-auto'> expand_more </span>
+          <span class='material-icons-outlined ms-auto'> expand_more </span>
         </button>
         <ul aria-labelledby='dropdownMenuButton' class='searchFilter__filter__dropdown__menu dropdown-menu py-0 mt-1'>
           <li class='dropdown-item' @click="filterCountries('All')">All</li>
