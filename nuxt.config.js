@@ -76,7 +76,7 @@ export default {
 
   proxy: {
     '/api/': {
-      target: 'https://restcountries.eu/rest/v2/',
+      target: 'http://restcountries.eu/rest/v2/',
       pathRewrite: { '^/api/': '' },
       changeOrigin: true,
     },
