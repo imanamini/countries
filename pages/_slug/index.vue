@@ -17,11 +17,14 @@
       </button>
     </nuxt-link>
     <div class='row m-0 justify-content-between'>
-      <img
-        :alt='country.name'
-        :src='country.flag'
-        class='country__flag col-lg-6 col-12 px-0 pe-lg-5 mb-5 mb-lg-0'
-      />
+      <div class=' col-lg-6 col-12 pe-lg-5 px-0 mb-5 mb-lg-0'>
+        <img
+          :alt='country.name'
+          :src='country.flag'
+          class='country__flag shadow'
+        />
+      </div>
+
       <div class='col-lg-6 col-12 px-0 px-lg-5'>
         <div class='country__name'>{{ country.name }}</div>
         <div class='row m-0'>
@@ -160,7 +163,7 @@ export default {
 }
 
 .country__flag {
-  border: 1px solid var(--border-color);
+  /*border: 1px solid var(--border-color);*/
   max-width: 100%;
   object-fit: contain;
 }

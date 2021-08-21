@@ -1,11 +1,11 @@
 <template>
-  <div class='container mt-4 px-0'>
+  <div class='container mt-4'>
     <slot v-for='(country,index) in countriesTemp'>
       <span :key='index'>{{ country.name }}</span>
     </slot>
     <div class='w-100 row m-0 searchFilter'>
       <div
-        class='d-flex align-items-center me-auto mb-5 mb-md-0 searchFilter__search'
+        class='d-flex align-items-center me-auto mb-5 mb-md-0 searchFilter__search px-0'
       >
         <span
           class='material-icons-outlined searchFilter__search__icon'
@@ -14,7 +14,7 @@
         </span>
         <input
           v-model='searchInput'
-          class='ml-4 h-100 searchFilter__search__input'
+          class='ml-4 h-100 w-100 searchFilter__search__input'
           placeholder='Search for a country...'
         />
       </div>
@@ -55,7 +55,7 @@
         <div
           v-if='country.show'
           :key='index'
-          class='col-md-3 country__card'
+          class='col-md-3 col-12 country__card'
         >
           <nuxt-link
             :to='country.name'
@@ -189,6 +189,12 @@ export default {
 }
 </script>
 <style scoped>
+@media screen and (max-width: 400px) {
+  .row {
+    justify-content: center !important;
+  }
+}
+
 ::placeholder {
   font-size: 12px;
   color: var(--color);
@@ -276,7 +282,6 @@ export default {
   background-color: var(--bg-secondary);
   max-width: 279px;
   min-width: 279px;
-  border: 1px solid #9e9e9e;
   box-shadow: 0 2px 4px rgba(33, 33, 33, 0.16);
   border-radius: 4px;
 }
@@ -284,6 +289,7 @@ export default {
 .country__card__content__flag {
   max-height: 160px;
   min-height: 160px;
+  border-radius: 4px 4px 0 0;
   object-fit: cover;
 }
 

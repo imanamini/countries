@@ -1,15 +1,11 @@
 <template>
-  <div class='w-100 position-fixed'
-       style='box-shadow: 0 2px 4px rgba(33, 33, 33, 0.16);z-index: 100; height: 67px; top: 0;background-color: var(--bg-secondary)'>
-
+  <div class='w-100 position-fixed header'>
     <div
-      class=' d-flex  align-items-center h-100 container pt-0'
-
+      class='d-flex align-items-center h-100 container pt-0'
     >
-      <div class='fw-800 fs-14' style='color: var(--color)'>Where in the world?</div>
+      <span class='fw-800 fs-14'>Where in the world?</span>
       <button
         class='ms-auto fs-12 fw-600 btn align-items-center d-flex'
-        style='color: var(--color)'
         @click='changeModeColor()'
       >
         <span class='material-icons-outlined fs-14 me-1'> dark_mode </span>
@@ -17,7 +13,6 @@
       </button>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -42,4 +37,20 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.header {
+  box-shadow: 0 2px 4px rgba(33, 33, 33, 0.16);
+  z-index: 100;
+  height: 67px;
+  top: 0;
+  background-color: var(--bg-secondary);
+}
+
+.header > div > span, .header > div > button {
+  color: var(--color)
+}
+
+.header > div > span {
+  padding-left: 12px;
+}
+</style>
