@@ -50,7 +50,7 @@
       </div>
     </div>
 
-    <div class='row m-0 mt-4 pt-2 justify-content-between'>
+    <div class='countries row m-0 mt-4 pt-2 justify-content-between'>
       <slot v-for='(country, index) in allCountries'>
         <div
           v-if='country.show'
@@ -106,7 +106,6 @@
 import Fuse from 'fuse.js'
 
 export default {
-
   data() {
     return {
       countriesTemp: [],
@@ -190,8 +189,8 @@ export default {
 }
 </script>
 <style scoped>
-@media screen and (max-width: 400px) {
-  .row {
+@media screen and (max-width: 600px) {
+  .countries {
     justify-content: center !important;
   }
 }
