@@ -1,8 +1,5 @@
 <template>
   <div class='container mt-4'>
-    <slot v-for='(country,index) in countriesTemp'>
-      <span :key='index'>{{ country.name }}</span>
-    </slot>
     <div class='w-100 row m-0 searchFilter'>
       <div
         class='d-flex align-items-center me-auto mb-5 mb-md-0 searchFilter__search px-0'
@@ -49,7 +46,6 @@
         </ul>
       </div>
     </div>
-
     <div class='countries row m-0 mt-4 pt-2 justify-content-between'>
       <slot v-for='(country, index) in allCountries'>
         <div
@@ -189,7 +185,7 @@ export default {
 }
 </script>
 <style scoped>
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 414px) {
   .countries {
     justify-content: center !important;
   }
