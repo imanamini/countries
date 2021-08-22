@@ -29,7 +29,7 @@
           <span class='material-icons-outlined ms-auto'> expand_more </span>
         </button>
         <ul aria-labelledby='dropdownMenuButton' class='searchFilter__filter__dropdown__menu dropdown-menu py-0 mt-1'>
-          <slot v-for='region of filterItems'>
+          <slot v-for='region in filterItems'>
             <li :key='region' class='dropdown-item' @click='filterCountries(region)'>{{ region }}</li>
           </slot>
         </ul>
@@ -151,6 +151,9 @@ export default {
     }
   },
   mounted() {
+    if (location.href.includes('?')) {
+      history.pushState({}, null, location.href.split('?')[0])
+    }
     for (const country of this.allCountries) {
       country.show = true
     }
