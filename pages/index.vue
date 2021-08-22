@@ -253,7 +253,7 @@ export default {
 .searchFilter__filter__dropdown__button {
   border: unset;
   border-radius: 4px;
-  box-shadow: 0px 2px 4px rgba(33, 33, 33, 0.16);
+  box-shadow: 0 2px 4px rgba(33, 33, 33, 0.16);
   height: 48px;
   color: var(--color);
   background-color: var(--bg-secondary);
@@ -261,7 +261,7 @@ export default {
 
 .searchFilter__filter__dropdown__menu {
   min-width: 188px;
-  box-shadow: 0px 2px 4px rgba(33, 33, 33, 0.16);
+  box-shadow: 0 2px 4px rgba(33, 33, 33, 0.16);
   border: unset;
 }
 

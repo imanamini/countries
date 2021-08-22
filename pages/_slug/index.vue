@@ -1,5 +1,5 @@
 <template>
-  <div class='container'>
+  <div class='container pb-5'>
     <nuxt-link to='/'>
       <button
         class='
