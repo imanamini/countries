@@ -261,6 +261,8 @@ export default {
 
 .searchFilter__filter__dropdown__menu {
   min-width: 188px;
+  box-shadow: 0px 2px 4px rgba(33, 33, 33, 0.16);
+  border: unset;
 }
 
 .dropdown-item {
