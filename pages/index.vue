@@ -29,20 +29,9 @@
           <span class='material-icons-outlined ms-auto'> expand_more </span>
         </button>
         <ul aria-labelledby='dropdownMenuButton' class='searchFilter__filter__dropdown__menu dropdown-menu py-0 mt-1'>
-          <li class='dropdown-item' @click="filterCountries('All')">All</li>
-          <li class='dropdown-item' @click="filterCountries('Africa')">
-            Africa
-          </li>
-          <li class='dropdown-item' @click="filterCountries('Americas')">
-            Americas
-          </li>
-          <li class='dropdown-item' @click="filterCountries('Asia')">Asia</li>
-          <li class='dropdown-item' @click="filterCountries('Europe')">
-            Europe
-          </li>
-          <li class='dropdown-item' @click="filterCountries('Oceania')">
-            Oceania
-          </li>
+          <slot v-for='region of filterItems'>
+            <li :key='region' class='dropdown-item' @click='filterCountries(region)'>{{ region }}</li>
+          </slot>
         </ul>
       </div>
     </div>
@@ -107,7 +96,8 @@ export default {
       countriesTemp: [],
       countries: [],
       searchInput: '',
-      isFilter: 'All'
+      isFilter: 'All',
+      filterItems: ['All', 'Africa', 'Americas', 'Asia', 'Europe', 'Oceania']
     }
   },
   fetch({ store, params }) {
@@ -180,6 +170,7 @@ export default {
         } else country.show = country.region === region
       }
       this.isFilter = region
+      this.$router.push({ query: { Region: region } })
     }
   }
 }
